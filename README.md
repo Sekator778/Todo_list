@@ -14,7 +14,7 @@
 
 <div>
 <p>Отображение страницы index.html</p>
-<img src="https://github.com/Sekator778/Todo_list/blob/master/src/resources/todo.png" alt="index_ToDo_List" width="300px" height="150px">
-<img src="https://github.com/Sekator778/Todo_list/blob/master/src/resources/alert.png" alt="add attribute" width="300px" height="150px">
+<img src="https://github.com/Sekator778/Todo_list/blob/master/src/img/todo.png" alt="index_ToDo_List" width="300px" height="150px">
+<img src="https://github.com/Sekator778/Todo_list/blob/master/src/img/alert.png" alt="add attribute" width="300px" height="150px">
 </div>
 </div>

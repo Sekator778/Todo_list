@@ -1,6 +1,9 @@
--- drop table if exists items;
+drop table if exists items;
+
 create table if not exists items
 (
-    id   serial primary key not null,
-    description varchar(2000)
+    id          serial primary key not null,
+    created     date,
+    description varchar(2000),
+    done        varchar(10)
 );

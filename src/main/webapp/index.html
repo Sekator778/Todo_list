@@ -1,27 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <title>TODO LiST</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../../css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="css/custom.css" rel="stylesheet" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: azure;
+        }
+
+        #table {
+            background-color: chocolate;
+        }
+            </style>
+
+    <script src="js/logic.js"></script>
+
 </head>
+
 <body>
+<div class="container">
+    <!--input new task-->
+    <div id="myDIV" class="header">
+        <h2 style="margin:5px">My To Do List</h2>
+    </div>
 
-<div id="myDIV" class="header">
-    <h2 style="margin:5px">My To Do List</h2>
-    <input type="text" id="myInput" placeholder="Title...">
-    <span onclick="newElement()" class="addBtn">Add</span>
+    <div>
+        <form>
+            <input type="text" placeholder="Task ..." id="newItemDescription">
+            <span onclick="addItem()" class="addBtn">Add</span>
+        </form>
+    </div>
+
+    <div class="row pt-2">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="allItems" value="option1"
+                   onchange="changeGetAllItems(this.id)">
+            <label class="form-check-label" for="allItems">
+                All Tasks
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="doneItems" value="option2"
+                   onchange="changeGetAllItems(this.id)">
+            <label class="form-check-label" for="doneItems">
+                Done tasks
+            </label>
+        </div>
+        <div class="form-check disabled">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="undoneItems" value="option3"
+                   onchange="changeGetAllItems(this.id)">
+            <label class="form-check-label" for="undoneItems">
+                Un done tasks
+            </label>
+        </div>
+    </div>
+
+    <div class="table table-bordered">
+        <table class="table table-bordered" id="table">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Description</th>
+                <th>Date of created</th>
+                <th>Done</th>
+            </tr>
+            </thead>
+            <tbody id="table_todo">
+            </tbody>
+        </table>
+    </div>
 </div>
-
-<ul id="myUL">
-    <li>Hit the gym</li>
-    <li class="checked">Pay bills</li>
-    <li>Meet George</li>
-    <li>Buy eggs</li>
-    <li>Read a book</li>
-    <li>Organize office</li>
-</ul>
-
-<script src="../../js/custom.js"></script>
 
 </body>
 </html>

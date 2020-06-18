@@ -1,7 +1,26 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>ItemServlet</servlet-name>
+    <servlet-class>view.ItemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ItemServlet</servlet-name>
+    <url-pattern>/items</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AddItemServlet</servlet-name>
+    <servlet-class>view.AddItemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddItemServlet</servlet-name>
+    <url-pattern>/save</url-pattern>
+  </servlet-mapping>
+
 </web-app>

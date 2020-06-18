@@ -1,16 +1,4 @@
-<style>
- #1 {
-            background-color: chocolate;
-        }
-  #2div {
-     width: 100px;	height: 100px; /* Размеры */
-     background: #fc0; /* Цвет фона */
-     outline: 2px solid #000; /* Чёрная рамка */
-     border: 3px solid #fff; /* Белая рамка */
-     border-radius: 10px; /* Радиус скругления */
-  }
-</style>
-<div id="1">
+<div >
 <h2>Todo_list</h2>
 
 <h3>Необходимо создать простое приложение todolist.</h3>
@@ -24,9 +12,9 @@
 <li> данные должны сохраняются в Database через Hibernate, </li>
 </ul>
 
-<div id="2div">
+<div>
 <p>Отображение страницы index.html</p>
-<img src="https://github.com/todo.png" alt="index_ToDo_List" width="300px" height="150px">
-<img src="https://github.com/alert.png" alt="add attribute" width="300px" height="150px">
+<img src="https://github.com/Sekator778/Todo_list/blob/master/src/resources/todo.png" alt="index_ToDo_List" width="300px" height="150px">
+<img src="https://github.com/Sekator778/Todo_list/blob/master/src/resources/alert.png" alt="add attribute" width="300px" height="150px">
 </div>
 </div>

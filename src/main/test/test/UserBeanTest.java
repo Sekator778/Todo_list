@@ -18,4 +18,14 @@ public class UserBeanTest {
         assertThat(resultJson, containsString("surname"));
     }
 
+    @Test
+    public void whenJsonGetObject() throws JsonProcessingException {
+        UserBean bean = new UserBean(1, "Alex");
+
+        String resultJson = new ObjectMapper().writeValueAsString(bean);
+        System.out.println(resultJson);
+        assertThat(resultJson, containsString("id"));
+        assertThat(resultJson, containsString("surname"));
+    }
+
 }

@@ -45,6 +45,8 @@ public class HbmTodo {
     /**
      * Здесь мы можем применить шаблон проектирования wrapper.
      *
+     * тут добавили блок try-catch и в нем rollback
+     *
      * @param command command to session
      * @param <T>     param command
      * @return result HQL or boolean

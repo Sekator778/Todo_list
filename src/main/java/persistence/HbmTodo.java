@@ -2,8 +2,12 @@ package persistence;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import model.Item;
+
+import java.util.function.Function;
+
 
 import org.hibernate.query.Query;
 
@@ -39,37 +43,50 @@ public class HbmTodo {
     }
 
     /**
+     * Здесь мы можем применить шаблон проектирования wrapper.
+     *
+     * @param command command to session
+     * @param <T>     param command
+     * @return result HQL or boolean
+     */
+    private <T> T tx(final Function<Session, T> command) {
+        final Session session = createSessionFactory().openSession();
+        final Transaction tx = session.beginTransaction();
+        try {
+            T rsl = command.apply(session);
+            tx.commit();
+            return rsl;
+        } catch (final Exception e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+
+    /**
      * add task to DB
      *
      * @param item - task
      * @return result true or false
      */
     public boolean save(Item item) {
-        boolean result;
-        try (Session session = createSessionFactory().getCurrentSession()) {
-            session.beginTransaction();
-            session.save(item);
-            session.getTransaction().commit();
-            session.close();
-            result = true;
-        }
-        return result;
+        return tx(
+                session -> {
+                    session.save(item);
+                    return true;
+                }
+        );
     }
 
     /**
-     * !!! зачем закрывать ???
-     *
      * @return - list all tasks
+     * with wrapper
      */
     public List<Item> findAllItem() {
-        List<Item> result;
-        try (Session session = createSessionFactory().getCurrentSession()) {
-            session.beginTransaction();
-            result = session.createQuery("from model.Item").list();
-            session.getTransaction().commit();
-            session.close();
-        }
-        return result;
+        return tx(
+                session -> session.createQuery("from model.Item").list()
+        );
     }
 
     /**
@@ -79,30 +96,29 @@ public class HbmTodo {
      * @return лист
      */
     public List<Item> findItemDone(String isDone) {
-        try (Session session = createSessionFactory().getCurrentSession()) {
-            session.beginTransaction();
-            Query query = session.createQuery("from model.Item where done = :param");
-            query.setParameter("param", isDone);
-            return (List<Item>) query.list();
-        }
+        return tx(
+                session -> {
+                    final Query query = session.createQuery("from model.Item where done = :param");
+                    query.setParameter("param", isDone);
+                    return query.list();
+                }
+        );
     }
 
     /**
      * set param done to item when id ==
-     * @param id find this item
+     *
+     * @param id     find this item
      * @param isDone - param for set
      * @return - true or false
      */
     public boolean setDone(int id, String isDone) {
-        boolean result;
-        try (Session session = createSessionFactory().getCurrentSession()) {
-            session.beginTransaction();
-            Item item = session.get(Item.class, id);
-            item.setDone(isDone);
-            session.save(item);
-            session.getTransaction().commit();
-            result = true;
-        }
-        return result;
+        return tx(
+                session -> {
+                    Item item = session.get(Item.class, id);
+                    item.setDone(isDone);
+                    return true;
+                }
+        );
     }
 }

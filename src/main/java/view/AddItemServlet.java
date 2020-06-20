@@ -15,10 +15,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 
-/**
- *
- */
-
 public class AddItemServlet extends HttpServlet {
     private final HbmTodo database = HbmTodo.getInstance();
 

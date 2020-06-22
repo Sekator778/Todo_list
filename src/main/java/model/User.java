@@ -3,6 +3,11 @@ package model;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * user-role связь many-to-one.
+ *
+ * Пользователь может иметь только одну роль.
+ */
 @Entity
 @Table(name = "j_user")
 public class User {

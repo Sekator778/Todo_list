@@ -7,7 +7,10 @@
   <groupId>org.example</groupId>
   <artifactId>todolist</artifactId>
   <version>1.0</version>
-  <packaging>war</packaging>
+    <modules>
+        <module>cars</module>
+    </modules>
+    <packaging>pom</packaging>
 
   <name>todolist Maven Webapp</name>
   <!-- FIXME change it to the project's website -->

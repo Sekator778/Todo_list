@@ -87,7 +87,8 @@ public class HbmTodo {
      */
     public List<Item> findAllItem() {
         return tx(
-                session -> session.createQuery("from model.Item").list()
+                session -> session.createQuery("from " + Item.class.getName(), Item.class).list()
+//                session -> session.createQuery("from model.Item").list()
         );
     }
 

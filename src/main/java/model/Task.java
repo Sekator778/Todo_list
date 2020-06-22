@@ -8,7 +8,7 @@ import java.time.LocalDate;
  */
 @Entity
 @Table(name = "items")
-public class Item {
+public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     /**
@@ -37,10 +37,10 @@ public class Item {
     /**
      * constructor for JPA
      */
-    public Item() {
+    public Task() {
     }
 
-    public Item(String description, LocalDate date, String done) {
+    public Task(String description, LocalDate date, String done) {
         this.description = description;
         this.date = date;
         this.done = done;
@@ -51,12 +51,12 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Item item = (Item) o;
+        Task task = (Task) o;
 
-        if (id != item.id) return false;
-        if (description != null ? !description.equals(item.description) : item.description != null) return false;
-        if (date != null ? !date.equals(item.date) : item.date != null) return false;
-        return done != null ? done.equals(item.done) : item.done == null;
+        if (id != task.id) return false;
+        if (description != null ? !description.equals(task.description) : task.description != null) return false;
+        if (date != null ? !date.equals(task.date) : task.date != null) return false;
+        return done != null ? done.equals(task.done) : task.done == null;
     }
 
     @Override

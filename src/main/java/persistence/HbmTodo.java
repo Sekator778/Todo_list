@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import model.Item;
+import model.Task;
 
 import java.util.function.Function;
 
@@ -13,7 +13,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class HbmTodo {
+public class HbmTodo implements Service{
     private static final HbmTodo INSTANCE = new HbmTodo();
 
     /**
@@ -38,7 +38,7 @@ public class HbmTodo {
     private SessionFactory createSessionFactory() {
         return new Configuration()
                 .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Item.class)
+                .addAnnotatedClass(Task.class)
                 .buildSessionFactory();
     }
 
@@ -69,13 +69,14 @@ public class HbmTodo {
     /**
      * add task to DB
      *
-     * @param item - task
+     * @param task - task
      * @return result true or false
      */
-    public boolean save(Item item) {
+    @Override
+    public boolean save(Task task) {
         return tx(
                 session -> {
-                    session.save(item);
+                    session.save(task);
                     return true;
                 }
         );
@@ -85,9 +86,10 @@ public class HbmTodo {
      * @return - list all tasks
      * with wrapper
      */
-    public List<Item> findAllItem() {
+    @Override
+    public List<Task> findAllItem() {
         return tx(
-                session -> session.createQuery("from " + Item.class.getName(), Item.class).list()
+                session -> session.createQuery("from " + Task.class.getName(), Task.class).list()
 //                session -> session.createQuery("from model.Item").list()
         );
     }
@@ -98,10 +100,11 @@ public class HbmTodo {
      * @param isDone - статус
      * @return лист
      */
-    public List<Item> findItemDone(String isDone) {
+    @Override
+    public List<Task> findItemDone(String isDone) {
         return tx(
                 session -> {
-                    final Query query = session.createQuery("from model.Item where done = :param");
+                    final Query query = session.createQuery("from model.Task where done = :param");
                     query.setParameter("param", isDone);
                     return query.list();
                 }
@@ -115,11 +118,12 @@ public class HbmTodo {
      * @param isDone - param for set
      * @return - true or false
      */
+    @Override
     public boolean setDone(int id, String isDone) {
         return tx(
                 session -> {
-                    Item item = session.get(Item.class, id);
-                    item.setDone(isDone);
+                    Task task = session.get(Task.class, id);
+                    task.setDone(isDone);
                     return true;
                 }
         );

@@ -7,7 +7,7 @@
 
   <servlet>
     <servlet-name>ItemServlet</servlet-name>
-    <servlet-class>view.ItemServlet</servlet-class>
+    <servlet-class>view.LoadItemServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ItemServlet</servlet-name>

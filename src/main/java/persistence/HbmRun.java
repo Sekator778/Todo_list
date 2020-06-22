@@ -1,6 +1,6 @@
 package persistence;
 
-import model.Item;
+import model.Task;
 import model.Role;
 import model.User;
 import org.hibernate.Session;
@@ -21,9 +21,9 @@ public class HbmRun {
             for (User user : findAll(User.class, sf)) {
                 System.out.println(user.getName() + " " + user.getRole().getName());
             }
-            Item item = new Item();
-            item.setDescription("test with HbmRun");
-            create(item, sf);
+            Task task = new Task();
+            task.setDescription("test with HbmRun");
+            create(task, sf);
         }  catch (Exception e) {
             e.printStackTrace();
         } finally {

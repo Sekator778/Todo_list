@@ -22,7 +22,7 @@
         <!-- Select our SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
 
-<!--        <mapping class="model.Item" />-->
+<!--        <mapping class="model.Task" />-->
 
         <mapping class="model.User" />
         <mapping class="model.Role" />

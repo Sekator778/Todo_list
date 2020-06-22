@@ -3,7 +3,7 @@ package view;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import model.Item;
+import model.Task;
 import persistence.HbmTodo;
 
 import javax.servlet.ServletException;
@@ -23,14 +23,15 @@ public class AddItemServlet extends HttpServlet {
         BufferedReader reader = req.getReader();
         StringBuilder builder = new StringBuilder();
         reader.lines().forEach(builder::append);
+
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode = mapper.readTree(builder.toString());
         String description = jsonNode.get("description").asText();
         ObjectNode responseNode = mapper.createObjectNode();
         LocalDate date = LocalDate.now();
-        Item saveItem = new Item(description, date, "undone");
-        if (database.save(saveItem)) {
-            responseNode.put("id", saveItem.getId())
+        Task saveTask = new Task(description, date, "undone");
+        if (database.save(saveTask)) {
+            responseNode.put("id", saveTask.getId())
                     .put("description", description)
                     .put("created", date.toString())
                     .put("done", "undone");

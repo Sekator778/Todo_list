@@ -14,9 +14,9 @@ public class App {
         try {
             factory = new Configuration().configure().buildSessionFactory();
             DAO<Car, Integer> dao = new CarDAO(factory);
-            read(dao);
-            update(dao);
-            create(dao);
+//            read(dao);
+//            update(dao);
+//            create(dao);
             delete(dao);
         } finally {
             if (factory != null) {

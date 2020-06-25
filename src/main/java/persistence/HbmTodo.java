@@ -44,9 +44,7 @@ public class HbmTodo implements Service{
 
     /**
      * Здесь мы можем применить шаблон проектирования wrapper.
-     *
      * тут добавили блок try-catch и в нем rollback
-     *
      * @param command command to session
      * @param <T>     param command
      * @return result HQL or boolean
@@ -68,7 +66,6 @@ public class HbmTodo implements Service{
 
     /**
      * add task to DB
-     *
      * @param task - task
      * @return result true or false
      */
@@ -96,7 +93,6 @@ public class HbmTodo implements Service{
 
     /**
      * лист задач в которых указанный в параметре статус
-     *
      * @param isDone - статус
      * @return лист
      */
@@ -113,7 +109,6 @@ public class HbmTodo implements Service{
 
     /**
      * set param done to item when id ==
-     *
      * @param id     find this item
      * @param isDone - param for set
      * @return - true or false

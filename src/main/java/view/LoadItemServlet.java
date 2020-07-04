@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import model.Task;
+import netscape.javascript.JSObject;
+import org.json.JSONObject;
 import persistence.HbmTodo;
 
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -48,26 +51,26 @@ public class LoadItemServlet extends HttpServlet {
         writer.println(builder);
         writer.flush();
     }
-
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        BufferedReader reader = req.getReader();
-        StringBuilder builder = new StringBuilder();
-        reader.lines().forEach(builder::append);
-
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {        BufferedReader reader = req.getReader();
+        StringBuilder sb = new StringBuilder();
+        reader.lines().forEach(sb::append);
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode node = mapper.readTree(builder.toString());
-
-        int id = node.get("id").asInt();
-        String done = node.get("done").asText();
-        ObjectNode responseNode = mapper.createObjectNode();
+        String json = sb.toString();
+        HashMap map = mapper.readValue(json, HashMap.class);
+        int id = Integer.parseInt((String) map.get("id"));
+        String done = (String) map.get("done");
+        JSONObject status = new JSONObject();
         if (database.setDone(id, done)) {
-            responseNode.put("success", true).put("id", id).put("done", done);
-        } else {
-            responseNode.put("success", false);
+            status.put("success", true);
+            status.put("id", id);
+            status.put("done", done);
         }
-        PrintWriter writer = resp.getWriter();
-        writer.append(mapper.writeValueAsString(responseNode));
+        else {
+            status.put("success", false);
+        }
+        PrintWriter writer = new PrintWriter(resp.getOutputStream());
+        writer.append(status.toString());
         writer.flush();
     }
 }

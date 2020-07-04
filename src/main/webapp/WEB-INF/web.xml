@@ -6,11 +6,11 @@
          version="2.4">
 
   <servlet>
-    <servlet-name>ItemServlet</servlet-name>
+    <servlet-name>LoadItemServlet</servlet-name>
     <servlet-class>view.LoadItemServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ItemServlet</servlet-name>
+    <servlet-name>LoadItemServlet</servlet-name>
     <url-pattern>/items</url-pattern>
   </servlet-mapping>
 

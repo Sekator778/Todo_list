@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 public class AddItemServlet extends HttpServlet {
     private final HbmTodo database = HbmTodo.getInstance();
@@ -23,10 +24,10 @@ public class AddItemServlet extends HttpServlet {
         BufferedReader reader = req.getReader();
         StringBuilder builder = new StringBuilder();
         reader.lines().forEach(builder::append);
-
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(builder.toString());
-        String description = jsonNode.get("description").asText();
+        String json = builder.toString();
+        HashMap map = mapper.readValue(json, HashMap.class);
+        String description = (String) map.get("description");
         ObjectNode responseNode = mapper.createObjectNode();
         LocalDate date = LocalDate.now();
         Task saveTask = new Task(description, date, "undone");

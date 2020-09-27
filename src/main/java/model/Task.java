@@ -29,7 +29,7 @@ public class Task {
     private LocalDate date;
 
     /**
-     *  done - if выполнена, undone - else нет
+     * done - if выполнена, undone - else нет
      */
     @Column(name = "done")
     private String done;
@@ -48,14 +48,22 @@ public class Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Task task = (Task) o;
-
-        if (id != task.id) return false;
-        if (description != null ? !description.equals(task.description) : task.description != null) return false;
-        if (date != null ? !date.equals(task.date) : task.date != null) return false;
+        if (id != task.id) {
+            return false;
+        }
+        if (description != null ? !description.equals(task.description) : task.description != null) {
+            return false;
+        }
+        if (date != null ? !date.equals(task.date) : task.date != null) {
+            return false;
+        }
         return done != null ? done.equals(task.done) : task.done == null;
     }
 
@@ -102,24 +110,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", date=" + date +
-                ", done='" + done + '\'' +
-                '}';
-    }
-
-    /**
-     * !!!!!!!!!!
-     */
-    public String toJsonString() {
-        return "{" +
-                "\"id\"" + ":" + id + "," +
-                "\"description\"" + ":" + "\"" + description + "\"," +
-                "\"date\"" + ":" + "\"" + date + "\"," +
-                "\"done\"" + ":" + "\"" + done + "\"" +
-                "}";
+        return "Item{" + "id=" + id + ", description='" + description + '\'' + ", date=" + date + ", done='" + done + '\'' + '}';
     }
 }
 

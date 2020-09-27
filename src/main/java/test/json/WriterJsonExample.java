@@ -14,15 +14,15 @@ import model.User;
 public class WriterJsonExample {
     public static void main(String[] args) throws IOException {
         //создание объекта для сериализации в JSON
-        User User = new User();
-        User.setName("Murka");
-        User.setId(5);
+        User user = new User();
+        user.setName("Murka");
+        user.setId(5);
         //писать результат сериализации будем во Writer(StringWriter)
         StringWriter writer = new StringWriter();
         //это объект Jackson, который выполняет сериализацию
         ObjectMapper mapper = new ObjectMapper();
         // сама сериализация: 1-куда, 2-что
-        mapper.writeValue(writer, User);
+        mapper.writeValue(writer, user);
         //преобразовываем все записанное во StringWriter в строку
         System.out.println("================= object -> json ==================");
 

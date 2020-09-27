@@ -1,13 +1,11 @@
 package view;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import model.Task;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.HbmTodo;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +22,11 @@ public class LoadItemServlet extends HttpServlet {
 
     private final HbmTodo database = HbmTodo.getInstance();
 
+    /**
+     * list to jsonArray
+     */
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         List<Task> taskList;
         String done = req.getParameter("done");
         if (done.equals("done")) {
@@ -35,24 +36,14 @@ public class LoadItemServlet extends HttpServlet {
         } else {
             taskList = database.findAllItem();
         }
-        StringBuilder builder = new StringBuilder();
-        builder.append("[");
-        int size = taskList.size();
-        for (int i = 0; i < size; i++) {
-            builder.append(taskList.get(i).toJsonString());
-            if (i == size - 1) {
-                break;
-            }
-            builder.append(",");
-        }
-        builder.append("]");
+        JSONArray jsArray = new JSONArray(taskList);
         PrintWriter writer = resp.getWriter();
-        writer.println(builder);
+        writer.println(jsArray.toString());
         writer.flush();
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         BufferedReader reader = req.getReader();
         StringBuilder sb = new StringBuilder();
         reader.lines().forEach(sb::append);
